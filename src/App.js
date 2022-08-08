@@ -3,7 +3,7 @@ import Home from './pages/home/Home';
 import Hotel from './pages/hotel/Hotel';
 import List from './pages/list/List';
 import Login from './pages/login/Login';
-
+// this is testing      onl for something
 function App() {
   return (
     <BrowserRouter>

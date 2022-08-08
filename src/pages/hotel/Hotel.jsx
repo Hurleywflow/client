@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import {
   faCircleArrowLeft,
   faCircleArrowRight,
@@ -18,6 +19,7 @@ import useFetch from '../../hooks/useFetch';
 import './hotel.css';
 
 const Hotel = () => {
+  // use location to get url params for hotel id
   const location = useLocation();
   const id = location.pathname.split('/')[2];
   const [slideNumber, setSlideNumber] = useState(0);
@@ -29,7 +31,6 @@ const Hotel = () => {
   const navigate = useNavigate();
 
   const {dates, options} = useContext(SearchContext);
-
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
     const timeDiff = Math.abs(date2.getTime() - date1.getTime());

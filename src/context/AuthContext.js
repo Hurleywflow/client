@@ -1,6 +1,7 @@
 import {createContext, useEffect, useReducer} from 'react';
 
 const INITIAL_STATE = {
+  // get user from local storage if it exists
   user: JSON.parse(localStorage.getItem('user')) || null,
   loading: false,
   error: null
@@ -43,6 +44,7 @@ export const AuthContextProvider = ({children}) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
   useEffect(() => {
+    // set user localStorage
     localStorage.setItem('user', JSON.stringify(state.user));
   }, [state.user]);
 

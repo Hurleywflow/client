@@ -18,6 +18,7 @@ const useFetch = (url) => {
       setLoading(false);
     };
     fetchData();
+    // if change immediately when changing data in url
   }, [url]);
 
   const reFetch = async () => {

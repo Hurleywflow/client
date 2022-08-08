@@ -1,12 +1,14 @@
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+/* eslint-disable no-shadow */
+/* eslint-disable react/no-array-index-key */
 import {faCircleXmark} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import './reserve.css';
-import useFetch from '../../hooks/useFetch';
-import {useContext, useState} from 'react';
-import {SearchContext} from '../../context/SearchContext';
 import axios from 'axios';
+import {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {SearchContext} from '../../context/SearchContext';
+import useFetch from '../../hooks/useFetch';
+import './reserve.css';
 
 const Reserve = ({setOpen, hotelId}) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
@@ -25,12 +27,11 @@ const Reserve = ({setOpen, hotelId}) => {
       dates.push(new Date(date).getTime());
       date.setDate(date.getDate() + 1);
     }
-
     return dates;
   };
 
   const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
-
+  // checking room availability
   const isAvailable = (roomNumber) => {
     const isFound = roomNumber.unavailableDates.some((date) =>
       alldates.includes(new Date(date).getTime())
@@ -63,7 +64,9 @@ const Reserve = ({setOpen, hotelId}) => {
       );
       setOpen(false);
       navigate('/');
-    } catch (err) {}
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <div className='reserve'>
@@ -85,8 +88,8 @@ const Reserve = ({setOpen, hotelId}) => {
               <div className='rPrice'>{item.price}</div>
             </div>
             <div className='rSelectRooms'>
-              {item.roomNumbers.map((roomNumber) => (
-                <div className='room'>
+              {item.roomNumbers.map((roomNumber, i) => (
+                <div className='room' key={i}>
                   <label>{roomNumber.number}</label>
                   <input
                     type='checkbox'
